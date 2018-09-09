@@ -1,0 +1,13 @@
+{
+  "apps": [
+    {
+      "name": "websocket",
+      "script": "./src",
+      "env": {
+        "NODE_PATH": "src"
+      },
+      "merge_logs": true,
+      "log_date_format": "YYYY-MM-DD HH:mm::ss.SSS Z"
+    }
+  ]
+}
