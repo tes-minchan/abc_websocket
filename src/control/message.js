@@ -11,12 +11,14 @@ module.exports = {
       data.channel.forEach(element => {
         let channel = {
           name : element.name,
+          coinList : [],
           askMarket : {},
           bidMarket : {},
           redisTable : []
         }
 
         element.product_ids.forEach(item => {
+          channel.coinList.push(item.name);
           channel.askMarket[item.name] = item.ask_market;
           channel.bidMarket[item.name] = item.bid_market;
 
@@ -29,17 +31,19 @@ module.exports = {
       });
 
     }
+
+
   },
 
-  sendData : (client) => {
+  sendData : (client) => {    
     client.subscribe.forEach(element => {
       if(element.name === 'aggregate') {
         subscribe.sendAggregate(client, element);
       }
-
-
+      else if(element.name === 'dashboard') {
+        console.log(element);
+      }
     });
-
   }
 
 

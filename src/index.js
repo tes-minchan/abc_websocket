@@ -26,12 +26,12 @@ wss.on('connection', function connection(ws) {
 wss.broadcast = function broadcast() {
   wss.clients.forEach(function each(client) {
     if (client.readyState === ws.OPEN) {
-
-      msgControl.sendData(client);
-
-    }
+      if(client.subscribe) {
+        msgControl.sendData(client);
+      }
+    } 
   });
 };
 
-setInterval(wss.broadcast, 1000, "test");
+setInterval(wss.broadcast, 1000);
 
