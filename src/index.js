@@ -17,6 +17,7 @@ wss.on('connection', function connection(ws) {
 
   ws.on('message', function incoming(data) {
     const parseJson = JSON.parse(data);
+
     msgControl.setSubsType(ws, parseJson);
   });
 
@@ -25,9 +26,14 @@ wss.on('connection', function connection(ws) {
 // Broadcast to all.
 wss.broadcast = function broadcast() {
   wss.clients.forEach(function each(client) {
+
     if (client.readyState === ws.OPEN) {
       if(client.subscribe) {
         msgControl.sendData(client);
+      }
+      else if(client.arbitrage) {
+        msgControl.sendArbData(client);
+
       }
     } 
   });

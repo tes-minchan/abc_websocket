@@ -3,7 +3,7 @@ const subscribe = require('./subscribe');
 
 module.exports = {
 
-  setSubsType : (ws, data) => {
+  setSubsType : (ws, data) => {    
     if(data.type === 'subscribe') {
 
       ws.subscribe = [];
@@ -31,6 +31,9 @@ module.exports = {
       });
 
     }
+    else if(data.type === 'arbi-tri') {
+      ws.arbitrage = data
+    }
 
 
   },
@@ -44,6 +47,11 @@ module.exports = {
         console.log(element);
       }
     });
+  },
+
+  sendArbData : (client) => {
+    subscribe.sendArbitrage(client);
+    
   }
 
 

@@ -17,6 +17,10 @@ module.exports = {
     else if (db === 1) {
       return redisClientAggregate.multi(table).execAsync();
     }
+  },
+
+  getMultiTable : (table) => {
+    return redisClientQuotes.multi(table).execAsync();
   }
 
 
